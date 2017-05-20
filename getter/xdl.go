@@ -38,10 +38,10 @@ func XDL() (result []*models.IP) {
 		sss, _ := s.Find("tr:nth-child(" + node + ") > td:nth-child(2)").Html()
 		ssss, _ := s.Find("tr:nth-child(" + node + ") > td:nth-child(4)").Html()
 		ssss = strings.Replace(strings.ToLower(ssss), "/", ",", -1)
-		ip := models.NewIP()
-		ip.Data = ss + ":" + sss
-		ip.Type = ssss
-		result = append(result, ip)
+		ip := models.NewIPAndCheck(ss + ":" + sss, ssss)
+		if ip != nil {
+			result = append(result, ip)
+		}
 	})
 	log.Println("XDL done.")
 	return

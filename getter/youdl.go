@@ -35,11 +35,11 @@ func YDL() (result []*models.IP) {
 		return
 	}
 	doc.Find(".content p").Each(func(_ int, s *goquery.Selection) {
-		ip := models.NewIP()
 		c := strings.Split(s.Text(), "@")
-		ip.Data = c[0]
-		ip.Type = strings.ToLower(strings.Split(c[1], "#")[0])
-		result = append(result, ip)
+		ip := models.NewIPAndCheck(c[0], strings.ToLower(strings.Split(c[1], "#")[0]))
+		if ip != nil {
+			result = append(result, ip)
+		}
 	})
 	log.Println("YDL done.")
 	return

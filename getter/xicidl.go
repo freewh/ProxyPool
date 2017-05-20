@@ -34,10 +34,10 @@ func Xici() (result []*models.IP) {
 		v = strings.Replace(v, "</td>", "", -1)
 		v = strings.Replace(v, " ", "", -1)
 		v = strings.Replace(v, "<br>", ":", -1)
-		ip := models.NewIP()
-		ip.Data = v
-		ip.Type = "http"
-		result = append(result, ip)
+		ip := models.NewIPAndCheck(v, "http")
+		if ip != nil {
+			result = append(result, ip)
+		}
 	}
 	log.Println("Xici done.")
 	return

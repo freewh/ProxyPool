@@ -44,10 +44,10 @@ func KDL() (result []*models.IP) {
 			sf, _ := s.Find("tr:nth-child(" + node + ") > td:nth-child(1)").Html()
 			ff, _ := s.Find("tr:nth-child(" + node + ") > td:nth-child(2)").Html()
 			hh, _ := s.Find("tr:nth-child(" + node + ") > td:nth-child(4)").Html()
-			ip := models.NewIP()
-			ip.Data = sf + ":" + ff
-			ip.Type = strings.ToLower(hh)
-			result = append(result, ip)
+			ip := models.NewIPAndCheck((sf + ":" + ff), strings.ToLower(hh))
+			if ip != nil {
+				result = append(result, ip)
+			}
 		})
 	}
 	log.Println("KDL done.")

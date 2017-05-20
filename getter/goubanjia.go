@@ -32,10 +32,10 @@ func GBJ() (result []*models.IP) {
 			sf, _ := s.Find(".ip").Html()
 			tee := regexp.MustCompile("<pstyle=\"display:none;\">.?.?</p>").ReplaceAllString(strings.Replace(sf, " ", "", -1), "")
 			re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
-			ip := models.NewIP()
-			ip.Data = re.ReplaceAllString(tee, "")
-			ip.Type = s.Find("td:nth-child(3) > a").Text()
-			result = append(result, ip)
+			ip := models.NewIPAndCheck(re.ReplaceAllString(tee, ""), s.Find("td:nth-child(3) > a").Text())
+			if ip != nil {
+				result = append(result, ip)
+			}
 		})
 	}
 	log.Println("GBJ done.")

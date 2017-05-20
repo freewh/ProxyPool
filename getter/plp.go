@@ -33,10 +33,10 @@ func PLP() (result []*models.IP) {
 		} else if ssss == "no" {
 			ssss = "http"
 		}
-		ip := models.NewIP()
-		ip.Data = ss + ":" + sss
-		ip.Type = ssss
-		result = append(result, ip)
+		ip := models.NewIPAndCheck(ss + ":" + sss, ssss)
+		if ip != nil {
+			result = append(result, ip)
+		}
 	})
 	log.Println("PLP done.")
 	if len(result) > 2 {

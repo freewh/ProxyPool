@@ -23,10 +23,10 @@ func IP66() (result []*models.IP) {
 	body = strings.Replace(body, "	", "", -1)
 	temp := strings.Split(body, "<br />")
 	for index := 0; index < len(temp[:len(temp)-1]); index++ {
-		ip := models.NewIP()
-		ip.Data = strings.TrimSpace(temp[index])
-		ip.Type = "http"
-		result = append(result, ip)
+		ip := models.NewIPAndCheck(strings.TrimSpace(temp[index]), "http")
+		if ip != nil {
+			result = append(result, ip)
+		}
 	}
 	log.Println("IP66 done.")
 	return

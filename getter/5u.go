@@ -29,10 +29,11 @@ func Data5u() (result []*models.IP) {
 		ss := s.Find("ul:nth-child(" + node + ") > span:nth-child(1) > li").Text()
 		sss := s.Find("ul:nth-child(" + node + ") > span:nth-child(2) > li").Text()
 		ssss := s.Find("ul:nth-child(" + node + ") > span:nth-child(4) > li").Text()
-		ip := models.NewIP()
-		ip.Data = ss + ":" + sss
-		ip.Type = ssss
-		result = append(result, ip)
+
+		ip := models.NewIPAndCheck(ss + ":" + sss, ssss)
+		if ip != nil {
+			result = append(result, ip)
+		}
 	})
 	log.Println("Data5u done.")
 	return

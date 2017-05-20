@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/henson/ProxyPool/models"
+	"github.com/freewh/ProxyPool/models"
 	"github.com/nladuo/go-phantomjs-fetcher"
 )
 
@@ -14,7 +14,7 @@ import (
 func XDL() (result []*models.IP) {
 	pollURL := "http://www.xdaili.cn/freeproxy.html"
 
-	fetcher, err := phantomjs.NewFetcher(2015, nil)
+	fetcher, err := phantomjs.NewFetcher(12015, nil)
 	defer fetcher.ShutDownPhantomJSServer()
 	if err != nil {
 		log.Println(err.Error())

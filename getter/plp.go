@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/henson/ProxyPool/models"
+	"github.com/freewh/ProxyPool/models"
 	"github.com/parnurzeal/gorequest"
 )
 
@@ -39,5 +39,9 @@ func PLP() (result []*models.IP) {
 		result = append(result, ip)
 	})
 	log.Println("PLP done.")
-	return result[2:]
+	if len(result) > 2 {
+		return result[2:]
+	} else {
+		return
+	}
 }

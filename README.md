@@ -1,5 +1,3 @@
-[![Travis Status for henson/MusicDownloader](https://travis-ci.org/henson/ProxyPool.svg?branch=master)](https://travis-ci.org/henson/ProxyPool) [![Go Report Card](https://goreportcard.com/badge/github.com/henson/ProxyPool)](https://goreportcard.com/report/github.com/henson/ProxyPool)
-
 # Golang实现的IP代理池
 
 > 采集免费的代理资源为爬虫提供有效的代理
@@ -86,7 +84,7 @@ github.com/nladuo/go-phantomjs-fetcher
 
 下载本项目：
 ```
-go get -u github.com/henson/ProxyPool
+go get -u github.com/freewh/ProxyPool
 ```
 
 然后配置好相应的config.json并启动：
@@ -110,3 +108,7 @@ GET http://localhost:8080/v1/https
 ### 4、感谢
 
 感谢 [J_hao104](https://github.com/jhao104/proxy_pool) 提供思路。
+
+
+--------------  
+Forked from [henson/ProxyPool](https://github.com/henson/ProxyPool)

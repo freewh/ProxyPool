@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/henson/ProxyPool/models"
+	"github.com/freewh/ProxyPool/models"
 	"github.com/nladuo/go-phantomjs-fetcher"
 )
 
@@ -14,7 +14,7 @@ import (
 func KDL() (result []*models.IP) {
 	pollURL := "http://www.kuaidaili.com/proxylist/"
 	//create a fetcher which seems to a httpClient
-	fetcher, err := phantomjs.NewFetcher(2016, nil)
+	fetcher, err := phantomjs.NewFetcher(12016, nil)
 	defer fetcher.ShutDownPhantomJSServer()
 	if err != nil {
 		log.Println(err.Error())

@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/henson/ProxyPool/models"
+	"github.com/freewh/ProxyPool/models"
 	"github.com/nladuo/go-phantomjs-fetcher"
 )
 
@@ -13,7 +13,7 @@ import (
 func Xici() (result []*models.IP) {
 	pollURL := "http://www.xicidaili.com/nn/"
 
-	fetcher, err := phantomjs.NewFetcher(2017, nil)
+	fetcher, err := phantomjs.NewFetcher(12017, nil)
 	defer fetcher.ShutDownPhantomJSServer()
 	if err != nil {
 		log.Println(err.Error())

@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"fmt"
 	"github.com/freewh/ProxyPool/api"
 	"github.com/freewh/ProxyPool/getter"
 	"github.com/freewh/ProxyPool/models"
@@ -63,6 +64,13 @@ func run(ipChan chan<- *models.IP) {
 	for _, f := range funs {
 		wg.Add(1)
 		go func(f func() []*models.IP) {
+
+			defer func() {
+				if err := recover(); err != nil {
+					fmt.Println(err)
+				}
+			}()
+
 			temp := f()
 			for _, v := range temp {
 				ipChan <- v

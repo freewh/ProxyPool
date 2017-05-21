@@ -2,8 +2,9 @@ package models
 
 import (
 	"gopkg.in/mgo.v2/bson"
-	"github.com/parnurzeal/gorequest"
 	"time"
+	"net/http"
+	"net/url"
 )
 
 // IP struct
@@ -39,9 +40,9 @@ func NewIPAndCheck(ip, schema string) *IP {
 func (ip *IP) CheckIP() bool {
 	pollURL := "http://httpbin.org/get"
 	start := time.Now().Unix()
-	resp, _, errs := gorequest.New().Proxy("http://" + ip.Data).Get(pollURL).End()
+	resp, err := proxyGet(pollURL, "http://" + ip.Data)
 	end := time.Now().Unix()
-	if errs != nil {
+	if err != nil {
 		return false
 	}
 	ip.Delay = end - start
@@ -52,4 +53,13 @@ func (ip *IP) CheckIP() bool {
 		return true
 	}
 	return false
+}
+
+func proxyGet(testUrl string, proxy string) (*http.Response, error) {
+	u, _ := url.Parse(testUrl)
+	transport := &http.Transport{Proxy: func(_ *http.Request) (*url.URL, error) {
+		return url.Parse(proxy)
+	}}
+    client := &http.Client{Transport: transport}
+    return client.Get(u.String())
 }

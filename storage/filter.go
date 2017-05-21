@@ -69,8 +69,14 @@ func ProxyRandom() (ip *models.IP) {
 func ProxyFind(value string) (ip *models.IP) {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	conn := NewStorage()
-	ips, _ := conn.FindAll(value)
+	ips, err := conn.FindAll(value)
+	if err != nil {
+		return nil
+	}
 	x := len(ips)
+	if x == 0 {
+		return nil
+	}
 
 	return ips[r.Intn(x)]
 }

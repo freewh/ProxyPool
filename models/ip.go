@@ -45,6 +45,9 @@ func (ip *IP) CheckIP() bool {
 		return false
 	}
 	ip.Delay = end - start
+	if ip.Delay > 1 {
+		return false
+	}
 	if resp.StatusCode == 200 {
 		return true
 	}
